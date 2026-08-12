@@ -1,0 +1,9 @@
+{
+  "name": "GENEVIEVE Real Connection Trial",
+  "short_name": "Real Connection",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#eef7f1",
+  "theme_color": "#1B4D2B",
+  "description": "A private, non-clinical friendship and connection companion."
+}

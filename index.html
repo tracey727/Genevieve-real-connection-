@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#1B4D2B" />
+  <meta name="description" content="GENEVIEVE Real Connection Trial — a private, non-clinical friendship and connection companion." />
+  <title>GENEVIEVE Real Connection Trial</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">GENEVIEVE APP™</p>
+        <h1>Real Connection Trial</h1>
+        <p class="tagline">No followers. No popularity. No boxes. Build real connection at your pace.</p>
+      </div>
+      <button id="menuBtn" class="icon-btn" aria-label="Open menu">☰</button>
+    </header>
+
+    <nav id="mainNav" class="nav" aria-label="Main navigation">
+      <button data-view="today" class="nav-btn active">Today</button>
+      <button data-view="people" class="nav-btn">People</button>
+      <button data-view="reflect" class="nav-btn">Reflect</button>
+      <button data-view="deeper" class="nav-btn">Deeper?</button>
+      <button data-view="life" class="nav-btn">Life List</button>
+      <button data-view="profile" class="nav-btn">My Fit</button>
+      <button data-view="privacy" class="nav-btn">Privacy</button>
+    </nav>
+
+    <main>
+      <section id="view-today" class="view active">
+        <section class="connection-mode-card" aria-labelledby="connectionModeTitle">
+          <div class="connection-mode-head">
+            <div>
+              <p class="eyebrow">YOUR CONNECTION PATH</p>
+              <h2 id="connectionModeTitle">Friendship or something deeper</h2>
+              <p>Start with connection. If something deeper develops, move one mutual step at a time.</p>
+            </div>
+          </div>
+          <div class="connection-art-wrap">
+            <img src="assets/connection-toggle.png" alt="Elegant two-women connection toggle" class="connection-art" />
+          </div>
+          <div class="connection-mode-controls" role="group" aria-label="Choose connection path">
+            <button id="friendshipPathBtn" class="mode-path-btn active" type="button" aria-pressed="true">Friendship</button>
+            <button id="deeperPathBtn" class="mode-path-btn" type="button" aria-pressed="false">Deeper connection</button>
+          </div>
+          <p id="connectionModeHint" class="connection-mode-hint">Build familiarity, conversation and reciprocity first.</p>
+        </section>
+
+        <div class="hero-card">
+          <div>
+            <span class="pill">Private trial</span>
+            <h2>What would feel good today?</h2>
+            <p>Choose one. The app will suggest one manageable step — not a social marathon.</p>
+          </div>
+          <div class="choice-grid" id="todayChoices"></div>
+        </div>
+
+        <div class="card" id="todayStepCard">
+          <div class="card-head">
+            <div>
+              <p class="eyebrow">TODAY'S CONNECTION STEP</p>
+              <h3 id="todayStepTitle">Choose what you want today</h3>
+            </div>
+            <span id="todayStepCost" class="cost-chip">$0 first</span>
+          </div>
+          <p id="todayStepText">Your step will appear here.</p>
+          <div class="button-row">
+            <button id="stepDoneBtn" class="primary-btn" disabled>Done</button>
+            <button id="newStepBtn" class="secondary-btn" disabled>Give me another</button>
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div class="card">
+            <p class="eyebrow">YOUR STARTING PLACES</p>
+            <h3>Where connection can grow</h3>
+            <div class="place-list">
+              <div><strong>Musgrave dog park</strong><span>Best repeated-contact opportunity</span></div>
+              <div><strong>Walking your dog</strong><span>Use a repeat route/time for familiar faces</span></div>
+              <div><strong>Groceries</strong><span>Good for tiny social reps, not deep friendship hunting</span></div>
+              <div><strong>Psychologist's office</strong><span>Professional space — not a friendship target</span></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <p class="eyebrow">PROGRESS COUNTS</p>
+            <h3>Small steps are real progress</h3>
+            <div class="metrics">
+              <div><span id="metricFamiliar">0</span><small>familiar people</small></div>
+              <div><span id="metricConversations">0</span><small>conversations</small></div>
+              <div><span id="metricInvites">0</span><small>small invitations</small></div>
+              <div><span id="metricReflections">0</span><small>reflections</small></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="view-people" class="view">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">PEOPLE TRACKER</p>
+            <h2>From stranger to genuine connection</h2>
+            <p>This is private. It helps you notice patterns instead of guessing.</p>
+          </div>
+          <button id="addPersonBtn" class="primary-btn">+ Add person</button>
+        </div>
+        <div id="peopleList" class="people-grid"></div>
+        <div id="emptyPeople" class="empty-state">
+          <h3>No one added yet</h3>
+          <p>When someone becomes a familiar face, add only what you need: a first name or nickname, where you know them from, and the current stage.</p>
+        </div>
+      </section>
+
+      <section id="view-reflect" class="view">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">PRIVATE REFLECTION</p>
+            <h2>How did that connection actually feel?</h2>
+            <p>The goal is understanding your experience — not diagnosing you or the other person.</p>
+          </div>
+        </div>
+
+        <form id="reflectionForm" class="card form-card">
+          <label>Who was this about?
+            <select id="reflectionPerson"></select>
+          </label>
+          <div class="question-list" id="reflectionQuestions"></div>
+          <label>Anything you want to remember?
+            <textarea id="reflectionNote" rows="4" placeholder="Optional. Keep this about what happened and how it felt."></textarea>
+          </label>
+          <button class="primary-btn" type="submit">Save reflection</button>
+        </form>
+
+        <div class="card result-card hidden" id="reflectionResult"></div>
+      </section>
+
+      <section id="view-deeper" class="view">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">FRIENDSHIP → SOMETHING MORE?</p>
+            <h2>The Mutual Step Principle</h2>
+            <p><strong>Invite. Notice. Ask. Match pace.</strong> No mind-reading, no pressure, no forced timetable.</p>
+          </div>
+        </div>
+
+        <div class="three-col">
+          <div class="signal-card green">
+            <h3>Green — continue naturally</h3>
+            <p>Mutual initiation, consistency, warmth, respected boundaries, room for independence, easy repair after small misunderstandings.</p>
+          </div>
+          <div class="signal-card yellow">
+            <h3>Yellow — slow down</h3>
+            <p>You are doing most of the work, intensity is racing ahead of knowledge, communication is inconsistent, or you are guessing instead of asking.</p>
+          </div>
+          <div class="signal-card red">
+            <h3>Red — do not progress</h3>
+            <p>Pressure after no, possessiveness, humiliation, monitoring, isolation, threats, sexual pressure, controlling behaviour or fear.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>6-stage micro-progression</h3>
+          <ol class="stages">
+            <li><strong>Familiarity:</strong> talk naturally when you see each other.</li>
+            <li><strong>Deliberate contact:</strong> suggest a small, low-pressure activity.</li>
+            <li><strong>One-to-one time:</strong> learn whether you actually enjoy each other's company.</li>
+            <li><strong>Slightly deeper conversation:</strong> values, hopes, humour, experiences — not a life-history dump.</li>
+            <li><strong>Reciprocity check:</strong> are they moving toward you too?</li>
+            <li><strong>Name the possibility:</strong> only when there is a pattern, ask rather than assume.</li>
+          </ol>
+        </div>
+
+        <form id="deeperForm" class="card form-card">
+          <label>Choose a person
+            <select id="deeperPerson"></select>
+          </label>
+          <div class="question-list" id="deeperQuestions"></div>
+          <button class="primary-btn" type="submit">Check the pattern</button>
+        </form>
+        <div class="card result-card hidden" id="deeperResult"></div>
+      </section>
+
+      <section id="view-life" class="view">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">LIFE EXPANSION</p>
+            <h2>Make life bigger, not more expensive</h2>
+            <p>Your current budget does not get to define your whole future.</p>
+          </div>
+          <button id="addLifeBtn" class="primary-btn">+ Add experience</button>
+        </div>
+        <div class="life-columns">
+          <div class="card">
+            <h3>Can do now — free / low cost</h3>
+            <div id="lifeNowList" class="life-list"></div>
+          </div>
+          <div class="card">
+            <h3>Want to experience one day</h3>
+            <div id="lifeFutureList" class="life-list"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="view-profile" class="view">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">FRIENDSHIP FIT</p>
+            <h2>Match by how you relate — not by labels</h2>
+            <p>This profile is for your own guidance. A future matching service should never expose private vulnerabilities or financial information.</p>
+          </div>
+        </div>
+        <form id="fitForm" class="card form-card"></form>
+      </section>
+
+      <section id="view-privacy" class="view">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">PRIVACY & SAFETY</p>
+            <h2>Your trial stays on this device</h2>
+          </div>
+        </div>
+        <div class="card">
+          <ul class="privacy-list">
+            <li>This prototype uses browser storage only. It does not create public profiles or upload your people/reflection data to a server.</li>
+            <li>Do not store full addresses, passwords, financial account details, diagnoses or another person's sensitive information.</li>
+            <li>Do not use another person's warmth, friendliness or physical proximity as consent to romance or touch. Ask.</li>
+            <li>First one-to-one meetings should be in ordinary public places. Do not reveal that you live alone or are isolated to new people.</li>
+            <li>If someone ignores a clear boundary, the app's job is not to help you "win them over" — it tells you to slow down or stop.</li>
+          </ul>
+        </div>
+        <div class="two-col">
+          <div class="card">
+            <h3>Backup my trial</h3>
+            <p>Download an encrypted-free JSON backup you can keep privately. Anyone with the file can read it, so store it carefully.</p>
+            <div class="button-row">
+              <button id="exportBtn" class="secondary-btn">Export data</button>
+              <label class="secondary-btn file-btn">Import data<input id="importFile" type="file" accept="application/json" hidden /></label>
+            </div>
+          </div>
+          <div class="card danger-card">
+            <h3>Delete all trial data</h3>
+            <p>This clears the information saved by this prototype in this browser.</p>
+            <button id="deleteAllBtn" class="danger-btn">Delete everything</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="personDialog" class="modal">
+    <form method="dialog" id="personForm">
+      <div class="modal-head"><h2>Add a person</h2><button value="cancel" class="icon-btn" aria-label="Close">✕</button></div>
+      <label>First name or nickname<input id="personName" maxlength="50" required /></label>
+      <label>Where do you know them from?
+        <select id="personPlace">
+          <option>Musgrave dog park</option>
+          <option>Walking my dog</option>
+          <option>Groceries</option>
+          <option>Free/community activity</option>
+          <option>Other</option>
+        </select>
+      </label>
+      <label>Current stage
+        <select id="personStage">
+          <option value="familiar">Familiar face</option>
+          <option value="conversation">Conversation</option>
+          <option value="acquaintance">Acquaintance</option>
+          <option value="contact">Contact outside setting</option>
+          <option value="activity">Doing something together</option>
+          <option value="friendship">Developing friendship</option>
+          <option value="deeper">Possibly something deeper</option>
+        </select>
+      </label>
+      <label>Optional note<textarea id="personNote" rows="3" placeholder="Keep it factual and minimal."></textarea></label>
+      <div class="button-row"><button value="cancel" class="secondary-btn">Cancel</button><button id="savePersonBtn" value="default" class="primary-btn">Save</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="lifeDialog" class="modal">
+    <form method="dialog" id="lifeForm">
+      <div class="modal-head"><h2>Add an experience</h2><button value="cancel" class="icon-btn" aria-label="Close">✕</button></div>
+      <label>Experience<input id="lifeTitle" maxlength="100" required placeholder="e.g. Comedy club" /></label>
+      <label>When?
+        <select id="lifeWhen"><option value="now">Can do now — free / low cost</option><option value="future">Want to experience one day</option></select>
+      </label>
+      <button id="saveLifeBtn" value="default" class="primary-btn">Save</button>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
